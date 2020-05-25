@@ -1,0 +1,61 @@
+
+images1.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+grass
+  rotate: false
+  xy: 2, 2
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+flowerandmap
+  rotate: false
+  xy: 84, 2
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+flower2andmap
+  rotate: false
+  xy: 166, 2
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+tankanim
+  rotate: false
+  xy: 248, 2
+  size: 320, 64
+  orig: 320, 64
+  offset: 0, 0
+  index: -1
+turret
+  rotate: false
+  xy: 570, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+tank
+  rotate: false
+  xy: 636, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+bullet
+  rotate: false
+  xy: 2, 84
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+flower
+  rotate: false
+  xy: 2, 102
+  size: 15, 15
+  orig: 15, 15
+  offset: 0, 0
+  index: -1
