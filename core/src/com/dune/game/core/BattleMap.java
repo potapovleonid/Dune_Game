@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
@@ -73,6 +74,8 @@ public class BattleMap {
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 import org.graalvm.compiler.loop.MathUtil;
 
 import java.util.Random;
@@ -96,6 +99,9 @@ public class BattleMap {
                 } else data[i][j] = false;
                 System.out.println(data[i][j]);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -103,6 +109,7 @@ public class BattleMap {
         }
     }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
     public int getResourceCount(Tank harvester) {
@@ -129,6 +136,8 @@ public class BattleMap {
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     public void render(SpriteBatch batch) {
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 9; j++) {
@@ -137,6 +146,9 @@ public class BattleMap {
                     batch.draw(flowerTexture, i * 80 + 40, j * 80 + 40);
                 }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -146,11 +158,14 @@ public class BattleMap {
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public void update(float dt) {
         for (int i = 0; i < COLUMNS_COUNT; i++) {
             for (int j = 0; j < ROWS_COUNT; j++) {
                 cells[i][j].update(dt);
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     public void update(GameObject gameObject) {
@@ -160,6 +175,9 @@ public class BattleMap {
                     data[i][j] = false;
                 }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
