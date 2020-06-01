@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import org.graalvm.compiler.loop.MathUtil;
 
 public class Projectile extends GameObject implements Poolable {
     private TextureRegion texture;
@@ -12,6 +13,7 @@ public class Projectile extends GameObject implements Poolable {
     private float speed;
     private float angle;
     private boolean active;
+    private int damage;
 
     @Override
     public boolean isActive() {
@@ -28,12 +30,18 @@ public class Projectile extends GameObject implements Poolable {
         this.speed = 640.0f;
     }
 
-    public void setup(Vector2 startPosition, float angle, TextureRegion texture) {
+    public void setup(Vector2 startPosition, float angle, TextureRegion texture, int damage) {
         this.texture = texture;
-        this.position.set(startPosition);
+        this.position.set(startPosition.x + MathUtils.cosDeg(angle) * 30,
+                startPosition.y + MathUtils.sinDeg(angle) * 30);
         this.angle = angle;
         this.velocity.set(speed * MathUtils.cosDeg(angle), speed * MathUtils.sinDeg(angle));
         this.active = true;
+        this.damage = damage;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     public void render(SpriteBatch batch) {

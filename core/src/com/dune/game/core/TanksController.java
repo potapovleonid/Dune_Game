@@ -43,6 +43,9 @@ public class TanksController extends ObjectPool<Tank> {
     public void update(float dt) {
         for (int i = 0; i < activeList.size(); i++) {
             activeList.get(i).update(dt);
+            if (!activeList.get(i).isActive()) {
+                free(i);
+            }
         }
         playerUpdate(dt);
         aiUpdate(dt);
@@ -61,6 +64,9 @@ public class TanksController extends ObjectPool<Tank> {
                     if (t.getWeapon().getType() == Weapon.Type.GROUND) {
                         Tank aiTank = gc.getTanksController().getNearestAiTank(tmp);
                         if (aiTank == null) {
+
+                            // возможность отменять таргет для передислокации
+                            gc.getSelectedUnits().get(i).setTarget(null);
                             t.commandMoveTo(tmp);
                         } else {
                             t.commandAttack(aiTank);

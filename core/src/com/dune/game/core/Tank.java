@@ -51,6 +51,10 @@ public class Tank extends GameObject implements Poolable {
         return ownerType;
     }
 
+    public void setTarget(Tank target) {
+        this.target = target;
+    }
+
     @Override
     public boolean isActive() {
         return hp > 0;
@@ -78,7 +82,7 @@ public class Tank extends GameObject implements Poolable {
         if (MathUtils.random() < 0.5f) {
             this.weapon = new Weapon(Weapon.Type.HARVEST, 3.0f, 1);
         } else {
-            this.weapon = new Weapon(Weapon.Type.GROUND, 1.5f, 1);
+            this.weapon = new Weapon(Weapon.Type.GROUND, 1.5f, 25);
         }
         this.destination = new Vector2(position);
     }
@@ -107,6 +111,9 @@ public class Tank extends GameObject implements Poolable {
                 position.mulAdd(tmp, -dt);
             }
         }
+        if (target != null && !gc.isActiveTank(target)) {
+            target = null;
+        }
         updateWeapon(dt);
         checkBounds();
     }
@@ -119,13 +126,17 @@ public class Tank extends GameObject implements Poolable {
         this.target = target;
     }
 
+    public void damageTo(int damage){
+        hp -= damage;
+    }
+
     public void updateWeapon(float dt) {
         if (weapon.getType() == Weapon.Type.GROUND && target != null) {
             float angleTo = tmp.set(target.position).sub(position).angle();
             weapon.setAngle(rotateTo(weapon.getAngle(), angleTo, 180.0f, dt));
             int power = weapon.use(dt);
             if (power > -1) {
-                gc.getProjectilesController().setup(position, weapon.getAngle());
+                gc.getProjectilesController().setup(position, weapon.getAngle(), power);
             }
         }
         if (weapon.getType() == Weapon.Type.HARVEST) {
