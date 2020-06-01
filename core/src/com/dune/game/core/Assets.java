@@ -35,7 +35,6 @@ public class Assets {
     public void loadAssets() {
         assetManager.load("game.pack", TextureAtlas.class);
         createStandardFont(32);
-        createStandardFont(10);
         assetManager.finishLoading();
         textureAtlas = assetManager.get("game.pack");
     }
@@ -53,7 +52,6 @@ public class Assets {
         fontParameter.fontParameters.shadowOffsetX = 1;
         fontParameter.fontParameters.shadowOffsetY = 1;
         fontParameter.fontParameters.shadowColor = Color.BLACK;
-        assetManager.load("fonts/font" + size + ".ttf", BitmapFont.class, fontParameter);
         assetManager.load("fonts/font" + size + ".ttf", BitmapFont.class, fontParameter);
     }
 
