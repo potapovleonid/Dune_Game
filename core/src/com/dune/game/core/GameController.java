@@ -79,10 +79,31 @@ public class GameController {
                 }
             }
         }
+        for (int i = 0; i < projectilesController.activeList.size(); i++) {
+            for (int j = 0; j < tanksController.activeSize(); j++) {
+                if (Math.abs(projectilesController.getActiveList().get(i).position.x -
+                        tanksController.getActiveList().get(j).position.x) <= 28 &&
+                        Math.abs(projectilesController.getActiveList().get(i).position.y -
+                                tanksController.getActiveList().get(j).position.y) <= 28) {
+                    tanksController.getActiveList().get(j).damageTo(projectilesController.getActiveList().get(i).getDamage());
+                    projectilesController.getActiveList().get(i).deactivate();
+                }
+            }
+        }
     }
 
     public boolean isTankSelected(Tank tank) {
         return selectedUnits.contains(tank);
+    }
+
+    //двойная проверка получается ...
+    public boolean isActiveTank(Tank tank){
+        for (int i = 0; i < tanksController.activeList.size(); i++) {
+            if (tanksController.activeList.get(i).equals(tank)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void prepareInput() {

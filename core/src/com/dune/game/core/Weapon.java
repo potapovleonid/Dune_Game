@@ -37,6 +37,10 @@ public class Weapon {
         return time / period;
     }
 
+    public int getPower() {
+        return power;
+    }
+
     public Weapon(Type type, float period, int power) {
         this.type = type;
         this.period = period;
