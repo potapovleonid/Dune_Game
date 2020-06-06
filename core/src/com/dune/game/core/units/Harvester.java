@@ -3,7 +3,7 @@ package com.dune.game.core.units;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dune.game.core.Assets;
-import com.dune.game.core.GameController;
+import com.dune.game.core.controllers.GameController;
 import com.dune.game.core.Targetable;
 import com.dune.game.core.Weapon;
 

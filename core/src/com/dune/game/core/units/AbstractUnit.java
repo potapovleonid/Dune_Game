@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.dune.game.core.*;
+import com.dune.game.core.controllers.GameController;
 
 public abstract class AbstractUnit extends GameObject implements Poolable, Targetable {
     protected UnitType unitType;
@@ -54,6 +55,10 @@ public abstract class AbstractUnit extends GameObject implements Poolable, Targe
         return weapon;
     }
 
+    public Vector2 getDestination() {
+        return destination;
+    }
+
     public void moveBy(Vector2 value) {
         boolean stayStill = false;
         if (position.dst(destination) < 3.0f) {
@@ -85,6 +90,10 @@ public abstract class AbstractUnit extends GameObject implements Poolable, Targe
 
     private int getCurrentFrameIndex() {
         return (int) (moveTimer / timePerFrame) % textures.length;
+    }
+
+    public Targetable getTarget() {
+        return target;
     }
 
     public void update(float dt) {
