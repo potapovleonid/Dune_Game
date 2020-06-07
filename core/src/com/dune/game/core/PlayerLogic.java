@@ -2,8 +2,8 @@ package com.dune.game.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.dune.game.core.controllers.GameController;
 import com.dune.game.core.units.AbstractUnit;
-import com.dune.game.core.units.BattleTank;
 import com.dune.game.core.units.Owner;
 import com.dune.game.core.units.UnitType;
 

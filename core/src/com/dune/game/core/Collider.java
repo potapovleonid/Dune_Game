@@ -1,8 +1,8 @@
 package com.dune.game.core;
 
 import com.badlogic.gdx.math.Vector2;
+import com.dune.game.core.controllers.GameController;
 import com.dune.game.core.units.AbstractUnit;
-import com.dune.game.core.units.BattleTank;
 
 import java.util.List;
 
