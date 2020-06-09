@@ -33,7 +33,18 @@ public class HarvestersController extends ObjectPool<Harvester> {
     public void update(float dt) {
         for (int i = 0; i < activeList.size(); i++) {
             activeList.get(i).update(dt);
+            dischargeResource(activeList.get(i));
         }
         checkPool();
+    }
+
+    public void dischargeResource(Harvester unit) {
+        if (Math.abs(unit.getPosition().x - gc.getMap().getPositionDischarge().x) < 37
+                && Math.abs(unit.getPosition().y - gc.getMap().getPositionDischarge().y) < 17
+                && unit.getContainer() > 0) {
+            gc.getPlayerLogic().setMoney(unit.getContainer() + gc.getPlayerLogic().getMoney());
+            unit.setContainer(0);
+
+        }
     }
 }

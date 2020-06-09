@@ -78,6 +78,12 @@ public class GameController {
         return map;
     }
 
+
+
+    public PlayerLogic getPlayerLogic() {
+        return playerLogic;
+    }
+
     public GameController() {
         this.mouse = new Vector2();
         this.tmp = new Vector2();
@@ -205,7 +211,7 @@ public class GameController {
         stage = new Stage(ScreenManager.getInstance().getViewport(), ScreenManager.getInstance().getBatch());
         Gdx.input.setInputProcessor(new InputMultiplexer(stage, prepareInput()));
         Skin skin = new Skin();
-        skin.addRegions(Assets.getInstance().getAtlas());
+        skin.addRegions(Assets.getInstance().getAtlas() );
         BitmapFont font14 = Assets.getInstance().getAssetManager().get("fonts/font14.ttf");
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle(
                 skin.getDrawable("smButton"), null, null, font14);

@@ -34,6 +34,7 @@ public class WorldRenderer {
         batch.end();
         ScreenManager.getInstance().resetCamera();
         gc.getStage().draw();
+
     }
 
     public void drawSelectionFrame() {

@@ -47,6 +47,10 @@ public class ScreenManager {
         return batch;
     }
 
+    public MenuScreen getMenuScreen() {
+        return menuScreen;
+    }
+
     private ScreenManager() {
     }
 
