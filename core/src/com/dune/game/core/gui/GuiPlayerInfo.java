@@ -32,4 +32,5 @@ public class GuiPlayerInfo extends Group {
         tmpSB.append("UNITS: ").append(playerLogic.getUnitsCount()).append(" / ").append(playerLogic.getUnitsMaxCount());
         unitsCount.setText(tmpSB);
     }
+
 }
