@@ -114,6 +114,10 @@ public class BattleMap {
         return cells[cx][cy].resource;
     }
 
+    public int getResourceCount(int cellX, int cellY) {
+        return cells[cellX][cellY].resource;
+    }
+
     public int harvestResource(Vector2 point, int power) {
         int value = 0;
         int cx = (int) (point.x / CELL_SIZE);
@@ -147,5 +151,17 @@ public class BattleMap {
 
     public Building getBuildingEntrance(int cellX, int cellY) {
         return cells[cellX][cellY].buildingEntrance;
+    }
+
+    public static int getColumnsCount() {
+        return COLUMNS_COUNT;
+    }
+
+    public static int getRowsCount() {
+        return ROWS_COUNT;
+    }
+
+    public static int getCellSize() {
+        return CELL_SIZE;
     }
 }
