@@ -1,8 +1,6 @@
 package com.dune.game.core.units;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.dune.game.core.*;
 import com.dune.game.core.interfaces.Targetable;
 import com.dune.game.core.units.types.UnitType;
@@ -12,11 +10,12 @@ import com.dune.game.screens.utils.Assets;
 public class Harvester extends AbstractUnit {
     public Harvester(GameController gc) {
         super(gc);
-        this.textures = Assets.getInstance().getAtlas().findRegion("tankcore").split(64, 64)[0];
+        this.textures = Assets.getInstance().getAtlas().findRegion("tankcore").split(CORE_SIZE, CORE_SIZE)[0];
         this.weaponTexture = Assets.getInstance().getAtlas().findRegion("harvester");
-        this.containerCapacity = 2;
+        this.containerCapacity = 3;
         this.minDstToActiveTarget = 5.0f;
-        this.speed = 120.0f;
+        this.speed = 60.0f;
+        this.rotationSpeed = 60.0f;
         this.weapon = new Weapon(4.0f, 1);
         this.hpMax = 500;
         this.unitType = UnitType.HARVESTER;
@@ -28,7 +27,8 @@ public class Harvester extends AbstractUnit {
         this.baseLogic = baseLogic;
         this.ownerType = baseLogic.getOwnerType();
         this.hp = this.hpMax;
-        this.destination = new Vector2(position);
+        this.destination.set(position);
+        this.commandMoveTo(this.position, true);
     }
 
     public void updateWeapon(float dt) {
@@ -40,31 +40,6 @@ public class Harvester extends AbstractUnit {
                     container = containerCapacity;
                 }
             }
-            float particlePositionX;
-            float particlePositionY;
-            Vector2 point = new Vector2();
-            for (int i = 0; i < 15; i++) {
-                particlePositionX = position.x + 25 + MathUtils.random(0, 15);
-                particlePositionY = position.y + MathUtils.random(-10, 10);
-                gc.getParticleController().setup(
-                        particlePositionX,
-                        particlePositionY,
-                        position.x - particlePositionX, position.y - particlePositionY,
-                        1f, 0.5f, 0.2f,
-                        0f, 0.4f, 0.7f, 0.7f,
-                        0f, 0.6f, 0.5f, 0.5f);
-            }
-            for (int i = 0; i < 40; i++) {
-                while (!(Math.abs(point.dst(position)) < 50 && Math.abs(point.dst(position)) > 35)) {
-                    point.x = position.x + MathUtils.random(-50, 50);
-                    point.y = position.y + MathUtils.random(-50, 50);
-                }
-                gc.getParticleController().setup(point.x, point.y,
-                        MathUtils.random(-15, 15), MathUtils.random(15, 15), 0.1f, 0.5f, 0.3f,
-                        0f, 0.4f, 0.7f, 0.7f,
-                        0f, 0.6f, 0.5f, 0.5f);
-                point.set(-100, - 100);
-            }
         } else {
             weapon.reset();
         }
@@ -72,17 +47,18 @@ public class Harvester extends AbstractUnit {
 
     @Override
     public void commandAttack(Targetable target) {
-        commandMoveTo(target.getPosition());
+        commandMoveTo(target.getPosition(), true);
     }
 
     @Override
     public void renderGui(SpriteBatch batch) {
         super.renderGui(batch);
-        if (weapon.getUsageTimePercentage() > 0.0f) {
+        if (container > 0) {
             batch.setColor(0.2f, 0.2f, 0.0f, 1.0f);
             batch.draw(progressbarTexture, position.x - 32, position.y + 22, 64, 8);
             batch.setColor(1.0f, 1.0f, 0.0f, 1.0f);
-            batch.draw(progressbarTexture, position.x - 30, position.y + 24, 60 * weapon.getUsageTimePercentage(), 4);
+            float containerPercentage = (float)container / containerCapacity;
+            batch.draw(progressbarTexture, position.x - 30, position.y + 24, 60 * containerPercentage, 4);
             batch.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         }
     }
@@ -90,7 +66,7 @@ public class Harvester extends AbstractUnit {
     public void update(float dt) {
         super.update(dt);
         Building b = gc.getMap().getBuildingEntrance(getCellX(), getCellY());
-        if (b != null && b.getType() == Building.Type.STOCK && b.getOwnerLogic() == this.baseLogic) {
+        if (b != null && b.getBuildingType() == Building.Type.STOCK && b.getOwnerLogic() == this.baseLogic) {
             baseLogic.addMoney(container * 100);
             container = 0;
         }
